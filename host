@@ -1,0 +1,9 @@
+[web-dev]
+#File host dapat menggunakan ip address atau domain seperti ini
+x.1.compute.amazonaws.com ansible_ssh_private_key_file=/xxx.pem
+x.2.compute.amazonaws.com ansible_ssh_private_key_file=/xxx.pem
+x.3.compute.amazonaws.com ansible_ssh_private_key_file=/xxx.pem
+x.4.compute.amazonaws.com ansible_ssh_private_key_file=/xxx.pem
+x.5.compute.amazonaws.com ansible_ssh_private_key_file=/xxx.pem
+#use command bellow to skip public key confirmation
+#export ANSIBLE_HOST_KEY_CHECKING=False
