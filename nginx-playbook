@@ -1,0 +1,36 @@
+- hosts: web-dev
+  remote_user: ubuntu #optional use normal user to connect
+  become: yes #give root access
+  tasks:
+    - name: Update Cache Repository 
+      apt:
+        update_cache: yes
+    - name: Install Aplikasi NGINX versi latest
+      apt:
+          name: nginx
+          state: latest
+          update_cache: yes
+    - name: Install Aplikasi PHP versi latest
+      apt:
+          name: php
+          state: latest
+          update_cache: yes
+    - name: Clear folder tmp repository
+      file:
+        path: /tmp/web/landing
+        state: absent
+    - name: Clonning Git Repository Website
+      git:
+        repo: https://github.com/creativetimofficial/awesome-landing-page.git
+        dest: /tmp/web/landing
+        clone: yes
+        update: yes
+    - name: Move website content to public HTML
+      shell: sudo mv /tmp/web/landing/ /var/www/html/
+    - name: Give folder permission
+      shell: sudo chown www-data:www-data /var/www/html/
+    - name: Restart Aplikasi NGINX
+      service:
+        name: nginx
+        state: restarted
+      become: yes
